@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  auth:
+    env_file:
+      - ../.envs/auth/.env
+    container_name: auth.floweryroad-api
+    build:
+      context: ./
+    volumes:
+      - "./:/auth"
+    ports:
+      - "8000:8000"
+    entrypoint: "python3 manage.py runserver"
+  auth-database:
+    env_file: 
+      - ../.envs/auth/db.env
+    image: postgres:12.2-alpine
+    container_name: database.auth.floweryroad-api
+    volumes:
+      - ./temp/db_data:/var/lib/postgresql/data:z
