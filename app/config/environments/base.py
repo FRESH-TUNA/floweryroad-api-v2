@@ -35,6 +35,9 @@ INSTALLED_APPS = PROJECT_APPS + [
     'corsheaders',
 ]
 
+# AUTH_USER_MODEL must be of the form 'app_label.model_name'
+AUTH_USER_MODEL = 'app.User'
+
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['rest_framework.filters.SearchFilter', 'rest_framework.filters.OrderingFilter', 'django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_AUTHENTICATION_CLASSES': [
