@@ -18,6 +18,7 @@ class FlowersCommentsSerializer(serializers.ModelSerializer):
     content = serializers.CharField(max_length=200, allow_blank=True)
     star = serializers.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)], default=0.0)
     
+
     class Meta:
         model = Comment
         fields = ['id', 'content', 'star',
@@ -26,7 +27,7 @@ class FlowersCommentsSerializer(serializers.ModelSerializer):
     def get_is_like(self, obj):
         if self.context['request'].user.is_authenticated:
             like_comment = CommentLike.objects.all().filter(
-                comment=obj, user=self.context['request'].user).first()
+                comment=obj, user=self.context['request'].user.id).first()
             if like_comment:    
                 return True
         return False
@@ -36,3 +37,7 @@ class FlowersCommentsSerializer(serializers.ModelSerializer):
             return True
         else:
             return False
+
+    def create(self, validated_data):
+        user = validated_data.pop("user")
+        return Comment.objects.create(**validated_data, user_id=user.id)

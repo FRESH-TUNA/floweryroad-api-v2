@@ -4,6 +4,7 @@ from app.serializers.flowers.comments import *
 from app.paginators import *
 from app.models import Comment, Flower
 from app.mixins.flowers.comments import CreateModelMixin
+from rest_framework_simplejwt.authentication import JWTTokenUserAuthentication
 
 class FlowersCommentsViewSet(CreateModelMixin, BaseGenericViewSet):
     pagination_class = FlowersCommentsPaginator
