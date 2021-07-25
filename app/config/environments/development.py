@@ -31,7 +31,7 @@ ROOT_URLCONF = 'config.urls.development'
 
 #media 설정
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = "http://localhost:8000/media/"
+MEDIA_URL = "http://localhost:8001/media/"
 
 LOGGING = {
     'version': 1,

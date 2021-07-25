@@ -1,0 +1,24 @@
+version: "3.5"
+services:
+  old-db:
+    env_file: 
+      - ./old.env
+    image: postgres:12.2-alpine
+    container_name: old-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - old-db:/var/lib/postgresql/data
+  new-db:
+    env_file: 
+      - ./new.env
+    image: postgres:12.2-alpine
+    container_name: new-db
+    ports:
+      - "5431:5432"
+    volumes:
+      - new-db:/var/lib/postgresql/mydata
+
+volumes:
+  old-db:
+  new-db:
