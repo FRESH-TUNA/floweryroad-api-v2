@@ -1,0 +1,7 @@
+# namespace 생성
+kubectl create namespace floweryroad
+
+# secret 생성
+kubectl create secret generic app --from-env-file=.envs/staging/app.env -n floweryroad
+kubectl create secret generic auth --from-env-file=.envs/staging/auth.env -n floweryroad
+
