@@ -12,4 +12,4 @@ RUN pip3 -v --no-cache-dir install -r requirements.txt && rm -rf requirements.tx
 COPY . .
 RUN cp ./supervisord.conf /etc/supervisor/conf.d
 
-ENTRYPOINT ["sh", "./docker/production/service"]
+ENTRYPOINT ["supervisord"]

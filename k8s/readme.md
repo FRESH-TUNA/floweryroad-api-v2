@@ -10,6 +10,7 @@
     app 생성
     ingress 생성
     로컬 프론트에서 테스트
+    MSA의 경우 django 모델 object에서 user를 바로 사용하지 않고 user_id 사용에 주의
 
 3. eks 괸련 자료 수집
 

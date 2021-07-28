@@ -33,7 +33,7 @@ class FlowersCommentsSerializer(serializers.ModelSerializer):
         return False
     
     def get_is_owner(self, obj):
-        if obj.user == self.context['request'].user:
+        if obj.user_id == self.context['request'].user.id:
             return True
         else:
             return False

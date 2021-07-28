@@ -2,7 +2,7 @@ from django.conf import settings
 from .base import *
 import os
 
-DEBUG = False
+DEBUG = True
 
 SECRET_KEY = os.environ['SECRET_KEY']
 

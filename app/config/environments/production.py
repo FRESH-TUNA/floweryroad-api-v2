@@ -2,7 +2,7 @@ from django.conf import settings
 from .base import *
 import os
 
-DEBUG = False
+DEBUG = True
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
@@ -13,17 +13,6 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASSWORD'],
-        'HOST': os.environ['DB_HOST'],
-        'PORT': os.environ['DB_PORT']
-    }
-}
 
 # AWS Setting
 AWS_REGION = os.environ['AWS_REGION']
@@ -37,8 +26,8 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
 # Static Setting
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-STATICFILES_STORAGE = 'config.storages.static_storage.StaticStorage' 
+STATICFILES_STORAGE = 'config.environments.storages.static_storage.StaticStorage' 
 
 # Media Setting
 MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-DEFAULT_FILE_STORAGE = 'config.storages.media_storage.MediaStorage' 
+DEFAULT_FILE_STORAGE = 'config.environments.storages.media_storage.MediaStorage' 

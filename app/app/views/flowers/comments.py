@@ -11,8 +11,7 @@ class FlowersCommentsViewSet(CreateModelMixin, BaseGenericViewSet):
     permission_classes = [CreateReadOnly]
 
     def get_queryset(self):
-        flower = Flower.objects.get(pk=self.kwargs['flower_pk'])
-        return Comment.objects.select_related('user', 'flower').prefetch_related('comment_likes', 'flower__images').filter(flower_id=self.kwargs['flower_pk']).order_by('-created_at')
+        return Comment.objects.select_related('flower').prefetch_related('comment_likes', 'flower__images').filter(flower_id=self.kwargs['flower_pk']).order_by('-created_at')
     
     def get_serializer_class(self):
         return FlowersCommentsSerializer

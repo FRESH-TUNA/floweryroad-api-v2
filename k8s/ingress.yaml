@@ -4,16 +4,20 @@ metadata:
   name: api-gateway
   namespace: floweryroad
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    # rewrite 하면 full path가 전달되지 않으므로 주의
+    # nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    http:
-      paths:
-      - path: /auth
-        backend:
-          serviceName: "auth"
-          servicePort: 80
-      - path: /app
-        backend:
-          serviceName: "app"
-          servicePort: 80
+    - http:
+        paths:
+        - path: /app
+          pathType: Prefix
+          backend:
+            service:
+              name: app
+              port:
+                number: 80
+    - path: /auth
+      backend:
+        serviceName: "auth"
+        servicePort: 80
