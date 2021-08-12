@@ -17,4 +17,28 @@ services:
     image: postgres:12.2-alpine
     container_name: database.auth.floweryroad-api
     volumes:
-      - ./auth/temp/db_data:/var/lib/postgresql/data:z
+      - database.auth.floweryroad-api:/var/lib/postgresql/data
+
+
+  app:
+    env_file:
+      - ./.envs/app/.env
+    container_name: app.floweryroad-api
+    build:
+      context: ./app
+    volumes:
+      - "./app:/app"
+    ports:
+      - "8001:8001"
+    entrypoint: "python3 manage.py runserver 0.0.0.0:8001"
+  app-database:
+    env_file: 
+      - ./.envs/app/db.env
+    image: postgres:12.2-alpine
+    container_name: database.app.floweryroad-api
+    volumes:
+      - database.app.floweryroad-api:/var/lib/postgresql/mydata
+
+volumes:
+  database.app.floweryroad-api:
+  database.auth.floweryroad-api:

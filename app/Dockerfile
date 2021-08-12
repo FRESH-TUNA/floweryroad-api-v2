@@ -1,6 +1,6 @@
 # production
 FROM lunacircle4/python:3.8.1
-WORKDIR /auth
+WORKDIR /app
 
 RUN apt update \
     && apt install -y postgresql postgresql-contrib libpq-dev supervisor zlib1g-dev libjpeg-dev \         

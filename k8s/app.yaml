@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: floweryroad
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: lunacircle4/app.floweryroad:${TAG}
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef:
+            name: app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  namespace: floweryroad
+spec:
+  ports:
+    - name: app
+      port: 80
+      targetPort: 80
+  selector:
+    app: app
+  type: ClusterIP

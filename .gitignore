@@ -152,3 +152,6 @@ mydatabase
 volume/
 pipeline.sh
 envs/*
+
+*.env
+dumps
